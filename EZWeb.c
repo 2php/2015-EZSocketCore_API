@@ -30,17 +30,6 @@ struct EZWeb_Resource * Do_GetResourceByInfo(struct EZWeb_ResourceController *pT
 {
     printf(" Do_GetResourceByInfo : path=%s\n",info.url);
     *Errorcode = 0;
-    int i;
-    for(i=0 ; i<MaxResources ; i++)
-    {
-        if(pThis->Resources[i] != NULL)
-        {
-            if(strcmp(pThis->Resources[i]->url,info.url)==0)
-            {
-                return pThis->Resources[i];
-            }
-        }
-    }
     FILE *fp = fopen(info.url,"rb");
     if(fp!=NULL)
     {
@@ -78,6 +67,7 @@ struct EZWeb_Resource * Do_GetResourceByInfo(struct EZWeb_ResourceController *pT
             {
                 Resource->datalength = datalength;
                 Resource->data=data;
+                Resource->type = info.type;
                 pThis->Resources[pThis->Count]=Resource;
                 return Resource;
             }
@@ -238,17 +228,21 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
     printf("%s",RcvBuffer);
     printf("-----------------------------------------\n");
     printf("length=%d\n",r);
-    char path[MaxResourcePath];
-    memset(path,0x0,MaxResourcePath);
-    sscanf(RcvBuffer,"GET %s HTTP",path);
-    printf("path=%s\n",path);
-    if(strcmp(path,"/")==0)
+    char webpath[MaxResourcePath];
+    char realpath[MaxResourcePath];
+    memset(webpath,0x0,MaxResourcePath);
+    sscanf(RcvBuffer,"GET %s HTTP",webpath);
+    printf("webpath=%s\n",webpath);
+    if(strcmp(webpath,"/")==0)
     {
-        memset(path,0x0,MaxResourcePath);
-        strcpy(path,"./index.html");
+        memset(webpath,0x0,MaxResourcePath);
+        strcpy(webpath,"./index.html");
     }
+    memset(realpath,0x0,MaxResourcePath);
+    sprintf(realpath,"./%s",webpath);
+    printf("realpath=%s\n",realpath);
     char temp[MaxResourcePath];
-    memcpy(temp,path,MaxResourcePath);
+    memcpy(temp,realpath,MaxResourcePath);
     char ignore[MaxResourcePath];
     int s;
     //remove all the "../" "./"  "xxx/" , after this block , out temp will become the fromat like "<filename>.<type>"
@@ -260,7 +254,7 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
     memset(type,0x0,100);
     struct EZWeb_ResourceInfo RequestFile;
     memset(&RequestFile,0x0,sizeof(struct EZWeb_ResourceInfo));
-    strcpy(RequestFile.url,path);
+    strcpy(RequestFile.url,realpath);
     //now we get the <type>
     sscanf(temp,"%[^.].%s",ignore,type);
     if(strcmp(type,"html")==0||strcmp(type,"htm")==0 || strcmp(type,"HTML")==0||strcmp(type,"HTM")==0)
@@ -368,6 +362,7 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
     else
     {
         printf("NOTICE : ResponseController->ResponseResource is NULL\n");
+        printf("Response 404 NOT Found\n");
         memset(SndBuffer,0x0,MAX_SEND_BUFFER);
         sprintf(SndBuffer,"HTTP/1.0 404 not found\r\%s\r\n\r\n",HttpContentType);
         //send http protocol header

@@ -62,7 +62,6 @@ struct Address_and_Port
 struct SERVICE               /* 當一個Client連上時，會建立一個SERVICE */
 {
         int id;
-        bool finish;
         int fd;
         struct Address_and_Port From;
         int ServerMainLoop_Type;

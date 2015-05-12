@@ -18,7 +18,6 @@ struct EZWeb_ResourceInfo
 
 struct EZWeb_Resource
 {
-    char url[FILEPATH_MAX_LENGTH];
     EZWeb_Type type;
     char *data;
     int datalength;

@@ -41,3 +41,45 @@
 1431412386 source:c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\ezuserdef.c
 	"EZUserdef.h"
 
+1431417932 source:/home/sam/Desktop/EZWeb/EZSocketCore.c
+	"EZSocketCore.h"
+
+1431417669 /home/sam/Desktop/EZWeb/EZSocketCore.h
+	<winsock.h>
+	<windows.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<string.h>
+	<errno.h>
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<fcntl.h>
+	<unistd.h>
+	"EZUserdef.h"
+	"EZWeb.h"
+
+1431417284 /home/sam/Desktop/EZWeb/EZUserdef.h
+	"EZSocketCore.h"
+
+1431419575 /home/sam/Desktop/EZWeb/EZWeb.h
+	"EZSocketCore.h"
+
+1431416793 source:/home/sam/Desktop/EZWeb/EZUserdef.c
+	"EZUserdef.h"
+
+1431419644 source:/home/sam/Desktop/EZWeb/EZWeb.c
+	"EZWeb.h"
+
+1431416793 source:/home/sam/Desktop/EZWeb/Main.c
+	"EZSocketCore.h"
+

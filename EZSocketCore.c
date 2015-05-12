@@ -1,7 +1,6 @@
 #include "EZSocketCore.h"
 #define ENABLE_SERVER
 #define ENABLE_CLIENT
-#define ENABLE_WINDOWS_SYSTEMCALL
 int Do_Socket( struct EZSocketCore *pThis )
 {
 		if ( (pThis->socket_id = socket(PF_INET, SOCK_STREAM, 0)) < 0 )
@@ -114,7 +113,6 @@ DWORD WINAPI Do_StartServerForever_ServiceThread( void *data )
             break;
     }
     printf("Do_StartServerForever_ServiceThread(%d)...exit\n",Client->id);
-    Client->finish=true;
     return 0;
 
 }
@@ -123,21 +121,28 @@ DWORD WINAPI Do_StartServerForever_ServiceThread( void *data )
 #ifdef ENABLE_LINUX_SYSTEMCALL
 void Do_StartServerForever_ServiceThread( struct SERVICE NewData )
 {
-    struct SERVICE NewData;  /*產生新的實體，防止被修改*/
-    memcpy(&NewData,data,sizeof(struct SERVICE));
     struct SERVICE *Client = &NewData;
+    printf("Do_StartServerForever_ServiceThread(%d)...enter\n",Client->id);
     switch(Client->ServerMainLoop_Type)
     {
         case ServerMainLoop_EZUserdef:
-            ServiceThread_EZUserdef_Loop(Client);
+            while(true)
+            {
+                ServiceThread_EZUserdef_Loop(Client);
+            }
+            close(Client->fd);
             break;
 
         case ServerMainLoop_EZWeb:
+            ServiceThread_EZWeb_Service(Client);
+            printf("Close socket\n");
+            close(Client->fd);
             break;
 
         default:
-            return;
+            break;
     }
+     printf("Do_StartServerForever_ServiceThread(%d)...exit\n",Client->id);
 }
 #endif // ENABLE_LINUX_SYSTEMCALL
 
@@ -176,9 +181,8 @@ void Do_StartServerForever( struct EZSocketCore *pThis)
         }
         #endif
 
-        #ifdef ENABLE_WINDOWS_SYSTEMCALL
+
         int count=0;
-        #endif
         while(true)
         {
             struct sockaddr_in Their;
@@ -197,16 +201,12 @@ void Do_StartServerForever( struct EZSocketCore *pThis)
                 #ifdef ENABLE_WINDOWS_SYSTEMCALL
                 printf("CreateThread\n");
                 newClient.id = ++count;
-                newClient.finish = false; //if it is parent thread , newClient.finish alway false
                 HANDLE thread = CreateThread(NULL, 0, Do_StartServerForever_ServiceThread, &newClient, 0, NULL);
-                if(newClient.finish)
-                {
-                    printf("child thread %d exit\n",newClient.id);
-                    return 0;
-                }
                 #endif // ENABLE_WINDOWS_SYSTEMCALL*/
 
                 #ifdef ENABLE_LINUX_SYSTEMCALL
+                printf("fork...\n");
+                newClient.id =  ++count;
                 int service = fork();
                 if(service==0)
                 {
