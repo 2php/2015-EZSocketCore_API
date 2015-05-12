@@ -75,6 +75,10 @@ struct SERVICE               /* 當一個Client連上時，會建立一個SERVICE */
 #define ServerMainLoop_EZUserdef  0x01
 #define ServerMainLoop_EZWeb      0x02
 
+extern struct EZSocketCore * GetServerHandler(int,int,void *,int *);
+extern struct EZSocketCore * GetClientHandler(struct Address_and_Port,int *);
+
+
 struct EZSocketCore
 {
 		struct sockaddr_in client_addr;

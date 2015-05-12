@@ -45,7 +45,7 @@ int main(void)
 {
 /*
     struct Address_and_Port Target;
-    int PORT = 80;  char *IP = "192.83.167.90";
+    int PORT = 9999;  char *IP = "127.0.0.1";
 	Target.port  =  PORT;
 	memset(Target.ip , '\0' ,IP_MAX_LENGTH );
 	strcpy(Target.ip ,   IP );
@@ -60,27 +60,24 @@ int main(void)
     else
     {
         char buffer[40000];
-        FILE *fin = fopen("test.txt","r");
         memset(buffer,0x0,40000);
-        int s = fread(buffer,1,40000,fin);
-        fclose(fin);
-        printf("-----------------------------------------\n");
-        printf("%s",buffer);
-        printf("-----------------------------------------\n");
+        strcpy(buffer,"GET / HTTP/1.1\r\n");
+        printf("%s\n",buffer);
         int w = ClientHandler->WriteToServer(ClientHandler,buffer,strlen(buffer));
         memset(buffer,0x0,40000);
         int r = ClientHandler->ReadFromServer(ClientHandler,buffer,40000);
         if(r<0)
         {
+            printf("r<0\n");
             close(ClientHandler->socket_id);
-            return;
+            return -1;
         }
         printf("w=%d r=%d\n",w,r);
         printf("%s\n",buffer);
     }
     return 0;
-*/
 
+*/
 
     int PORT = 9999;
     int ERRORCODE;
