@@ -146,6 +146,19 @@ void Do_StartServerForever_ServiceThread( struct SERVICE NewData )
 }
 #endif // ENABLE_LINUX_SYSTEMCALL
 
+
+#ifdef ENABLE_LINUX_SYSTEMCALL
+void HandleZombie(int s)
+{
+	pid_t pid;
+	int stat=0;
+	pid = wait(&stat);
+	printf("child %d exit\n",pid);
+	return;
+}
+
+#endif
+
 void Do_StartServerForever( struct EZSocketCore *pThis)
 {
         #ifdef ENABLE_WINDOWS_SYSTEMCALL
@@ -181,6 +194,10 @@ void Do_StartServerForever( struct EZSocketCore *pThis)
         }
         #endif
 
+	#ifdef ENABLE_LINUX_SYSTEMCALL
+	//handle child hold signal , improve effect of fork
+	signal(SIGCHLD,HandleZombie);
+	#endif
 
         int count=0;
         while(true)

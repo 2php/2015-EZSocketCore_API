@@ -22,6 +22,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <sys/wait.h>
+#include <stdlib.h>
 #define Delay(second) sleep(second);
 #define ENABLE_LINUX_SYSTEMCALL
 #endif
