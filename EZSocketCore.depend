@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1431415073 source:c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\ezweb.c
+	"EZWeb.h"
+
+1431409740 source:c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\main.c
+	"EZSocketCore.h"
+
+1431415429 c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\ezsocketcore.h
+	<winsock.h>
+	<windows.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<string.h>
+	<errno.h>
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<fcntl.h>
+	<unistd.h>
+	"EZUserdef.h"
+	"EZWeb.h"
+
+1431345287 c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\ezuserdef.h
+	"EZSocketCore.h"
+
+1431408241 c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\ezweb.h
+	"EZSocketCore.h"
+
+1431415686 source:c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\ezsocketcore.c
+	"EZSocketCore.h"
+
+1431412386 source:c:\users\shuosan\desktop\newsocketprojectinc\ezsocketcore\ezsocketcore\ezuserdef.c
+	"EZUserdef.h"
+
