@@ -135,7 +135,7 @@ void Do_StartServerForever_ServiceThread( struct SERVICE NewData )
 
         default:
             break;
-
+    }
             
 }
 #endif // ENABLE_LINUX_SYSTEMCALL
