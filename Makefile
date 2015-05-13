@@ -1,6 +1,6 @@
 CC=gcc
 
-all: EX1 EX2 EX3
+all: ex1 ex2 ex3
 
 ex1: EZSocketCore.o EZUserdef.o EZWeb.o Example1_Timeserver.o
 	$(CC) EZSocketCore.o EZUserdef.o EZWeb.o Example1_Timeserver.o -o Timeserver

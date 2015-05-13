@@ -15,8 +15,11 @@ int ServiceThread_EZUserdef_Loop(struct SERVICE *Client)
             return 0;
         }
         memset(SndBuffer,0x0,MAX_SEND_BUFFER);
-        void (*EZUserdefLoop)(struct Address_and_Port,char*,int,char*,int) =  Client->ServerMainLoop;   //收到資料後該如何處理
+        void (*EZUserdefLoop)(struct Address_and_Port,char*,int,char*,int*) =  Client->ServerMainLoop;   //收到資料後該如何處理
+        printf("EZUserdefLoop...\n");
         EZUserdefLoop(Client->From,RcvBuffer,r,SndBuffer,&w);
+        printf("EZUserdefLoop...ok\n");
+
         if(w>0)
         {
             if(w>MAX_SEND_BUFFER)
@@ -34,17 +37,21 @@ int ServiceThread_EZUserdef_Loop(struct SERVICE *Client)
                 else
                 {
                     if(r!=w)
+                    {
                         printf("only port of data have sent to %s:%d , %d/%d\n",Client->From.ip,Client->From.port,r,w);
+                        return 0;
+                    }
                     else
                         printf("response OK\n");
                 }
             }
         }
-        if(w<0)
+        else
         {
-            printf("recv already close/timeout ! disconnect to %s:%d\n",Client->From.ip,Client->From.port);
+            printf("no data to send...\n");
             return 0;
         }
+        
     }
 }
 

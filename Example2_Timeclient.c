@@ -5,14 +5,22 @@
 
 #include "EZSocketCore.h"
 
-int main(void)
+int main(int argc,char **argv)
 {
     int Errorcode;
     char ErrorMsg[1024];
-	struct Address_and_Port server;
-	memset(&server,0x0,sizeof(struct Address_and_Port));
-	strcpy(server.ip,"127.0.0.1");
-	server.port=9999;
+    struct Address_and_Port server;
+    memset(&server,0x0,sizeof(struct Address_and_Port));
+    if(argc==3)
+    {
+        strcpy(server.ip,argv[1]);
+        server.port=atoi(argv[2]);
+    }
+    else
+    {
+        strcpy(server.ip,"127.0.0.1");
+        server.port=9999;
+    }
     struct EZSocketCore * ClientHandler = GetClientHandler(server,&Errorcode);
     if(ClientHandler==NULL)
     {
