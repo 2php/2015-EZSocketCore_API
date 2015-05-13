@@ -83,3 +83,54 @@
 1431416793 source:/home/sam/Desktop/EZWeb/Main.c
 	"EZSocketCore.h"
 
+1431482650 source:c:\users\shuosan\desktop\ezsock\ezsocketcore.c
+	"EZSocketCore.h"
+
+1431482875 c:\users\shuosan\desktop\ezsock\ezsocketcore.h
+	<winsock.h>
+	<windows.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<sys/wait.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<string.h>
+	<errno.h>
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<fcntl.h>
+	<unistd.h>
+	"EZUserdef.h"
+	"EZWeb.h"
+
+1431469349 c:\users\shuosan\desktop\ezsock\ezuserdef.h
+	"EZSocketCore.h"
+
+1431478872 c:\users\shuosan\desktop\ezsock\ezweb.h
+	"EZSocketCore.h"
+
+1431482689 source:c:\users\shuosan\desktop\ezsock\ezuserdef.c
+	"EZUserdef.h"
+
+1431478971 source:c:\users\shuosan\desktop\ezsock\ezweb.c
+	"EZWeb.h"
+
+1431479440 source:c:\users\shuosan\desktop\ezsock\example3_webserver.c
+	"EZSocketCore.h"
+
+1431481806 source:c:\users\shuosan\desktop\ezsock\example1_timeserver.c
+	"EZSocketCore.h"
+	<time.h>
+
+1431482969 source:c:\users\shuosan\desktop\ezsock\example2_timeclient.c
+	"EZSocketCore.h"
+

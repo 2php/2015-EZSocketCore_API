@@ -43,9 +43,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="EZWeb.h" />
-		<Unit filename="Main.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />

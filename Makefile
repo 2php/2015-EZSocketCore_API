@@ -1,31 +1,26 @@
 CC=gcc
 
-INCFLAGS=-I.
-LIBFLAGS=-L.
+all: EX1 EX2 EX3
 
-REL_FLAGS=-Ofast -DNDEBUG
-DBG_FLAGS=-g -DDEBUG
-PROF_FLAGS=-pg
+ex1: EZSocketCore.o EZUserdef.o EZWeb.o Example1_Timeserver.o
+	$(CC) EZSocketCore.o EZUserdef.o EZWeb.o Example1_Timeserver.o -o Timeserver
+ex2: EZSocketCore.o EZUserdef.o EZWeb.o Example2_Timeclient.o
+	$(CC) EZSocketCore.o EZUserdef.o EZWeb.o Example2_Timeclient.o -o Timeclient
+ex3: EZSocketCore.o EZUserdef.o EZWeb.o Example3_Webserver.o
+	$(CC) EZSocketCore.o EZUserdef.o EZWeb.o Example3_Webserver.o -o Webserver
 
-SRCS=$(shell ls *.c)
-OBJS=$(patsubst %.cpp,%.o,$(SRCS))
-REL_OBJS=$(patsubst %.cpp,%_release.o,$(SRCS))
-DBG_OBJS=$(patsubst %.cpp,%_debug.o,$(SRCS))
-PROF_OBJS=$(patsubst %.cpp,%_prof.o,$(SRCS))
-
-program=main_release 
-all: $(program)
-main_release: $(REL_OBJS)
-	$(CC) $(CXXFLAGS) -o $@ $^ $(REL_FLAGS) $(LDFLAGS)
-
-%.o: %.c
-	$(CC) -o $@ -c $< $(CXXFLAGS) $(INCFLAGS) $(LIBFLAGS)
-%_release.o: %.c
-	$(CC) -o $@ -c $< $(CXXFLAGS) $(REL_FLAGS) $(INCFLAGS) $(LIBFLAGS)
-%_debug.o: %.c
-	$(CC) -o $@ -c $< $(CXXFLAGS) $(DBG_FLAGS) $(INCFLAGS) $(LIBFLAGS)
-%_prof.o: %.c
-	$(CC) -o $@ -c $< $(CXXFLAGS) $(PROF_FLAGS) $(INCFLAGS) $(LIBFLAGS)
-
+EZSocketCore.o: EZSocketCore.c
+	$(CC) EZSocketCore.c -c
+EZUserdef.o: EZUserdef.c
+	$(CC) EZUserdef.c -c
+EZWeb.o: EZWeb.c
+	$(CC) EZWeb.c -c
+Example1_Timeserver.o: Example1_Timeserver.c
+	$(CC) Example1_Timeserver.c -c
+Example2_Timeclient.o: Example2_Timeclient.c
+	$(CC) Example2_Timeclient.c -c
+Example3_Webserver.o: Example3_Webserver.c
+	$(CC) Example3_Webserver.c -c	
+	
 clean:
-	rm -rf *.o main_release
+	rm -rf *.o Timeserver Timeclient Webserver

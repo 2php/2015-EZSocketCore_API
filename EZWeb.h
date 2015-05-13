@@ -6,7 +6,7 @@
 #define MaxResources 1024
 #define MaxResourcesSize 1024*1024*10   //10MB
 
-enum EZWeb_Type{HTML,PNG,JPEG,GIF,MSWORD,PDF,TXT,UNKNOW};
+enum EZWeb_Type{HTML,PNG,JPEG,GIF,MSWORD,PDF,TXT,UNKNOW,SOURCECODE};
 typedef enum EZWeb_Type EZWeb_Type;
 
 

@@ -40,6 +40,11 @@ int ServiceThread_EZUserdef_Loop(struct SERVICE *Client)
                 }
             }
         }
+        if(w<0)
+        {
+            printf("recv already close/timeout ! disconnect to %s:%d\n",Client->From.ip,Client->From.port);
+            return 0;
+        }
     }
 }
 

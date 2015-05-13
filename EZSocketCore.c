@@ -96,10 +96,7 @@ DWORD WINAPI Do_StartServerForever_ServiceThread( void *data )
     switch(Client->ServerMainLoop_Type)
     {
         case ServerMainLoop_EZUserdef:
-            while(true)
-            {
-                ServiceThread_EZUserdef_Loop(Client);
-            }
+            ServiceThread_EZUserdef_Loop(Client);
             close(Client->fd);
             break;
 
@@ -126,10 +123,7 @@ void Do_StartServerForever_ServiceThread( struct SERVICE NewData )
     switch(Client->ServerMainLoop_Type)
     {
         case ServerMainLoop_EZUserdef:
-            while(true)
-            {
-                ServiceThread_EZUserdef_Loop(Client);
-            }
+            ServiceThread_EZUserdef_Loop(Client);
             close(Client->fd);
             break;
 
@@ -265,6 +259,11 @@ int Do_ReadFromServer( struct EZSocketCore *pThis , char *buffer , int maxlength
             return -1;
 }
 
+void Do_DisconnectToServer(struct EZSocketCore *pThis )
+{
+		close(pThis->socket_id);
+}
+
 struct EZSocketCore * EZSocketCore_INIT()
 {
         struct EZSocketCore * pThis;
@@ -283,6 +282,7 @@ struct EZSocketCore * EZSocketCore_INIT()
 		pThis->StartServerForever = Do_StartServerForever;
 		pThis->WriteToServer = Do_WriteToServer;
 		pThis->ReadFromServer = Do_ReadFromServer;
+		pThis->DisconnectToServer = Do_DisconnectToServer;
 		return pThis;
 }
 //==========================================================================================================================================

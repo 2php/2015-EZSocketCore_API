@@ -77,6 +77,8 @@ struct SERVICE               /* 當一個Client連上時，會建立一個SERVICE */
 
 extern struct EZSocketCore * GetServerHandler(int,int,void *,int *);
 extern struct EZSocketCore * GetClientHandler(struct Address_and_Port,int *);
+extern void GetClientErrorMsg(int,char *,int);
+extern void GetServerErrorMsg(int,char *,int);
 
 
 struct EZSocketCore
@@ -99,6 +101,7 @@ struct EZSocketCore
         int ServerMainLoop_Type;
         int (*WriteToServer)( struct EZSocketCore *pThis , char *buffer , int length );
 		int (*ReadFromServer)( struct EZSocketCore *pThis , char *buffer , int maxlength );
+		void(*DisconnectToServer)( struct EZSocketCore *pThis);
 };
 
 #endif // _EZSOCKETCORE_H_

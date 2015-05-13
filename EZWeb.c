@@ -285,6 +285,10 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
     {
         RequestFile.type=PDF;
     }
+    else if(strcmp(type,"c")==0||strcmp(type,"cpp")==0)
+    {
+        RequestFile.type=SOURCECODE;
+    }
     else
     {
         RequestFile.type=UNKNOW;
@@ -326,6 +330,7 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
             break;
 
             case TXT:
+            case SOURCECODE:
             strcpy(HttpContentType,"Content-Type: text/plain");
             break;
 
