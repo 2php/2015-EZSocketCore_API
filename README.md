@@ -1,18 +1,25 @@
+<h1>NCU NWLab socket programming homework</h3>
+<h3>Author:史碩三</h1>
+<div>
+<h4>Welcome to the demo webside of sam33's EZSocketCore library EZWeb component</h4>
+sam33's EZSocketCore library : <a href="https://github.com/SAM33/EZSocketCore">Github</a> </br>
+</div>
+<br/>
+<div>
 -----------------------------------------------------------------------------------------------------------<br/>
 這次的socket programming作業,我的主題是一個簡易的跨平台socket api<br/>
-主要提供三個模型,其一為簡易的多工Server,二為簡易的防卡死Client,三為簡易的WebServer<br/>
+主要提供三個模型,其一為簡易的多工Server,二為簡易的Client,三為簡易的WebServer<br/>
 並使用此api的三個模型功能各自撰寫了一個example來Demo<br/>
 但是目前WebServer模型在Windows上貌似有各種問題,主要是因為採用Windows的CreateThread代替fork的關係<br/>
 之後會想辦法解決,目前衍生的問題為在Windows上採用此模型撰寫的WebServer程式,在瀏覽時,IE瀏覽器上會無回應</br>
 而Chrome瀏覽器有時會有回應,有時無回應.<br/>
 在Linux系統或Mac上使用此模型撰寫及編譯出來的WebServer程式則無此問題<br/>
 <br/>
-此api透過一些封裝,讓使用者能夠過c語言簡易地撰寫具有多工功能的簡易伺服器端以及具有Timeout功能的簡易客戶端<br/>
+此api透過一些封裝,讓使用者能夠過c語言簡易地撰寫具有多工功能的簡易伺服器端以及簡易客戶端<br/>
 另外,此api也封裝了部分的HTTP1.0伺服器功能,能夠讓使用者快速設計一個具有網頁服務功能的伺服器端<br/>
 <br/>
 Demo程式分為兩類,一為簡單的DateTime伺服器以及客戶端<br/>
 二為簡易的網頁服務伺服器,就是各為現在正在使用的這個功能<br/>
-
 <br/>
 -----------------------------------------------------------------------------------------------------------<br/>
 <pre>

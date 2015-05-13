@@ -92,7 +92,7 @@ DWORD WINAPI Do_StartServerForever_ServiceThread( void *data )
     struct SERVICE NewData;  /*產生新的實體，防止被修改*/
     memcpy(&NewData,data,sizeof(struct SERVICE));
     struct SERVICE *Client = &NewData;
-    printf("Do_StartServerForever_ServiceThread(%d)...enter\n",Client->id);
+
     switch(Client->ServerMainLoop_Type)
     {
         case ServerMainLoop_EZUserdef:
@@ -109,7 +109,7 @@ DWORD WINAPI Do_StartServerForever_ServiceThread( void *data )
         default:
             break;
     }
-    printf("Do_StartServerForever_ServiceThread(%d)...exit\n",Client->id);
+
     return 0;
 
 }
@@ -119,7 +119,7 @@ DWORD WINAPI Do_StartServerForever_ServiceThread( void *data )
 void Do_StartServerForever_ServiceThread( struct SERVICE NewData )
 {
     struct SERVICE *Client = &NewData;
-    printf("Do_StartServerForever_ServiceThread(%d)...enter\n",Client->id);
+
     switch(Client->ServerMainLoop_Type)
     {
         case ServerMainLoop_EZUserdef:
@@ -135,8 +135,8 @@ void Do_StartServerForever_ServiceThread( struct SERVICE NewData )
 
         default:
             break;
-    }
-     printf("Do_StartServerForever_ServiceThread(%d)...exit\n",Client->id);
+
+            
 }
 #endif // ENABLE_LINUX_SYSTEMCALL
 

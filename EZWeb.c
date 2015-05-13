@@ -28,7 +28,7 @@ void Do_ClearResource(struct EZWeb_ResourceController *pThis)
 //------------------------------- get a resource and turn it to EZWeb_Resource type from web root folder recursive  -------------------------------
 struct EZWeb_Resource * Do_GetResourceByInfo(struct EZWeb_ResourceController *pThis,struct EZWeb_ResourceInfo info, int *Errorcode)
 {
-    printf(" Do_GetResourceByInfo : path=%s\n",info.url);
+    //printf(" Do_GetResourceByInfo : path=%s\n",info.url);
     *Errorcode = 0;
     FILE *fp = fopen(info.url,"rb");
     if(fp!=NULL)
@@ -191,7 +191,7 @@ struct EZWeb_ResponseController * GetEZWebResponseControllerHandler(int * ERRORC
 //------------------------------- EZWeb component MainLoop -------------------------------
 int ServiceThread_EZWeb_Service(struct SERVICE *Client)
 {
-    printf("ServiceThread_EZWeb_Loop(%d)\n",Client->id);
+
     char RcvBuffer[MAX_RECV_BUFFER];
     char SndBuffer[MAX_SEND_BUFFER];
     int errorcode;
@@ -216,23 +216,23 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
     /* NOTICE!! This version is very week on directory traversal attack . if I have enough time , I will repair this in the next version */
     /* NOTICE!! I just recv once from the client fd . if browser request lager than MAX_RECV_BUFFER  , this program ignore part of request */
     memset(RcvBuffer,0x0,MAX_RECV_BUFFER);
-    printf("Recv\n");
+
     int r = recv(Client->fd, RcvBuffer, MAX_RECV_BUFFER, 0);
     if(r<=0)
     {
         printf("recv already close/timeout ! disconnect to %s:%d\n",Client->From.ip,Client->From.port);
         return 0;
     }
-    printf("Show\n");
-    printf("-----------------------------------------\n");
-    printf("%s",RcvBuffer);
-    printf("-----------------------------------------\n");
-    printf("length=%d\n",r);
+
+    //printf("-----------------------------------------\n");
+    //printf("%s",RcvBuffer);
+    //printf("-----------------------------------------\n");
+    //printf("length=%d\n",r);
     char webpath[MaxResourcePath];
     char realpath[MaxResourcePath];
     memset(webpath,0x0,MaxResourcePath);
     sscanf(RcvBuffer,"GET %s HTTP",webpath);
-    printf("webpath=%s\n",webpath);
+    //printf("webpath=%s\n",webpath);
     if(strcmp(webpath,"/")==0)
     {
         memset(webpath,0x0,MaxResourcePath);
@@ -240,7 +240,7 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
     }
     memset(realpath,0x0,MaxResourcePath);
     sprintf(realpath,"./%s",webpath);
-    printf("realpath=%s\n",realpath);
+    //printf("realpath=%s\n",realpath);
     char temp[MaxResourcePath];
     memcpy(temp,realpath,MaxResourcePath);
     char ignore[MaxResourcePath];
@@ -296,9 +296,9 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
     void (*EZWebService)(struct Address_and_Port,struct EZWeb_ResourceInfo ReqFile , \
                          struct EZWeb_ResourceController *ResourceCTL,struct EZWeb_ResponseController *RsponseCTL) \
                           =  Client->ServerMainLoop;
-    printf("EZWebLoop\n");
+
     EZWebService(Client->From,RequestFile,ResourceController,ResponseController);
-    printf("OK\n");
+
     char HttpContentType[100];
     memset(HttpContentType,0x0,100);
     if(ResponseController->ResponseResource != NULL)
@@ -341,35 +341,35 @@ int ServiceThread_EZWeb_Service(struct SERVICE *Client)
 
         int w;
         memset(SndBuffer,0x0,MAX_SEND_BUFFER);
-        printf("Response 200 OK\n");
+        //printf("Response 200 OK\n");
         sprintf(SndBuffer,"HTTP/1.1 200 OK\r\n%s\r\n\r\n",HttpContentType);
         //send http protocol header
-        printf("%s\n",SndBuffer);
+        //printf("%s\n",SndBuffer);
         w = send(Client->fd,SndBuffer,strlen(SndBuffer),0);
         if(w<0)
         {
             printf("send already close/timeout ! disconnect to %s:%d\n",Client->From.ip,Client->From.port);
             return 0;
         }
-        printf("strlen=%d;w=%d\n",strlen(SndBuffer),w);
+        //printf("strlen=%d;w=%d\n",strlen(SndBuffer),w);
             //send content data
 
-        printf("Response data\n");
+        //printf("Response data\n");
         w = send(Client->fd,ResponseController->ResponseResource->data,ResponseController->ResponseResource->datalength,0);
         if(w<0)
         {
             printf("send already close/timeout ! disconnect to %s:%d\n",Client->From.ip,Client->From.port);
             return 0;
         }
-        printf("datalen=%d;w=%d\n",ResponseController->ResponseResource->datalength,w);
+        //printf("datalen=%d;w=%d\n",ResponseController->ResponseResource->datalength,w);
         return 0;
     }
     else
     {
-        printf("NOTICE : ResponseController->ResponseResource is NULL\n");
-        printf("Response 404 NOT Found\n");
+        //printf("NOTICE : ResponseController->ResponseResource is NULL\n");
+        //printf("Response 404 NOT Found\n");
         memset(SndBuffer,0x0,MAX_SEND_BUFFER);
-        sprintf(SndBuffer,"HTTP/1.0 404 not found\r\%s\r\n\r\n",HttpContentType);
+        sprintf(SndBuffer,"HTTP/1.1 404 not found\r\%s\r\n\r\n",HttpContentType);
         //send http protocol header
         int w = send(Client->fd,SndBuffer,strlen(SndBuffer),0);
         if(w<0)

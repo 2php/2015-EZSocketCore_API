@@ -1,7 +1,7 @@
 #include "EZUserdef.h"
 int ServiceThread_EZUserdef_Loop(struct SERVICE *Client)
 {
-    printf("ServiceThread_EZUserdef_Loop\n");
+
     char RcvBuffer[MAX_RECV_BUFFER];
     char SndBuffer[MAX_SEND_BUFFER];
     while(true)
@@ -16,9 +16,9 @@ int ServiceThread_EZUserdef_Loop(struct SERVICE *Client)
         }
         memset(SndBuffer,0x0,MAX_SEND_BUFFER);
         void (*EZUserdefLoop)(struct Address_and_Port,char*,int,char*,int*) =  Client->ServerMainLoop;   //收到資料後該如何處理
-        printf("EZUserdefLoop...\n");
+
         EZUserdefLoop(Client->From,RcvBuffer,r,SndBuffer,&w);
-        printf("EZUserdefLoop...ok\n");
+
 
         if(w>0)
         {
@@ -41,8 +41,6 @@ int ServiceThread_EZUserdef_Loop(struct SERVICE *Client)
                         printf("only port of data have sent to %s:%d , %d/%d\n",Client->From.ip,Client->From.port,r,w);
                         return 0;
                     }
-                    else
-                        printf("response OK\n");
                 }
             }
         }
