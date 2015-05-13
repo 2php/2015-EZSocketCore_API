@@ -1,4 +1,4 @@
-﻿<html lang="zh-TW">
+<html lang="zh-TW">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <h1>NCU NWLab socket programming homework</h3>
 <h3>Author:史碩三</h1>
@@ -8,6 +8,8 @@ sam33's EZSocketCore library : <a href="https://github.com/SAM33/EZSocketCore">G
 </div>
 <br/>
 <div>
+    <br/>
+<a href="/document/userguide.pdf">說明文件</a><br/><br/>
 -----------------------------------------------------------------------------------------------------------<br/>
 這次的socket programming作業,我的主題是一個簡易的跨平台socket api<br/>
 主要提供三個模型,其一為簡易的多工Server,二為簡易的Client,三為簡易的WebServer<br/>
@@ -21,7 +23,7 @@ sam33's EZSocketCore library : <a href="https://github.com/SAM33/EZSocketCore">G
 另外,此api也封裝了部分的HTTP1.0伺服器功能,能夠讓使用者快速設計一個具有網頁服務功能的伺服器端<br/>
 <br/>
 Demo程式分為兩類,一為簡單的DateTime伺服器以及客戶端<br/>
-二為簡易的網頁服務伺服器,就是各為現在正在使用的這個功能<br/>
+二為簡易的網頁服務伺服器,就是您現在正在使用的這個功能<br/>
 <a href="/Example1_Timeserver.c">Example1_Timeserver.c</a> </br>
 <a href="/Example2_Timeclient.c">Example2_Timeclient.c</a> </br>
 <a href="/Example3_Webserver.c">Example3_Webserver.c</a> </br>
@@ -53,7 +55,7 @@ Example2_Timeclient:
 ./Timeclient xxx.xxx.xxx.xxx Y
 Example: ./Timeclient 192.168.1.100 9999
 
-Example3_Webserver:(佔用port 10000,可自行修改source code)
+Example3_Webserver:(佔用port 9999,可自行修改source code)
 1.先啟動Webserver於本機(假設ip為xxx.xxx.xxx.xxx)
 ./Webserver
 2.開啟任意瀏覽器,於網址列輸入http://xxx.xxx.xxx.xxx:9999/
@@ -68,7 +70,7 @@ Example3_Webserver:(佔用port 10000,可自行修改source code)
 <img src="images/html5.gif">test gif</img>
 <div/>
 <br/>
-<a href="/document/userguide.docx">User's Guide</a>
+<a href="/document/api_reference.pdf">API Reference</a><br/>
 <br/>
 -----------------------------------------------------------------------------------------------------------<br/>
 

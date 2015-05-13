@@ -19,7 +19,7 @@ sam33's EZSocketCore library : <a href="https://github.com/SAM33/EZSocketCore">G
 另外,此api也封裝了部分的HTTP1.0伺服器功能,能夠讓使用者快速設計一個具有網頁服務功能的伺服器端<br/>
 <br/>
 Demo程式分為兩類,一為簡單的DateTime伺服器以及客戶端<br/>
-二為簡易的網頁服務伺服器,就是各為現在正在使用的這個功能<br/>
+二為簡易的網頁服務伺服器,就是您現在正在使用的這個功能<br/>
 <br/>
 -----------------------------------------------------------------------------------------------------------<br/>
 <pre>
@@ -47,7 +47,7 @@ Example2_Timeclient:
 ./Timeclient xxx.xxx.xxx.xxx Y
 Example: ./Timeclient 192.168.1.100 9999
 
-Example3_Webserver:(佔用port 10000,可自行修改source code)
+Example3_Webserver:(佔用port 9999,可自行修改source code)
 1.先啟動Webserver於本機(假設ip為xxx.xxx.xxx.xxx)
 ./Webserver
 2.開啟任意瀏覽器,於網址列輸入http://xxx.xxx.xxx.xxx:9999/

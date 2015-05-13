@@ -31,12 +31,12 @@ int main(int argc,char **argv)
     {
         printf("Connect!\n");
         char buffer[100];
-		memset(buffer,0x0,100);
-		strcpy(buffer,"time?\n");
-		ClientHandler->WriteToServer(ClientHandler,buffer,strlen(buffer));
-		ClientHandler->ReadFromServer(ClientHandler,buffer,sizeof(buffer));
-		ClientHandler->DisconnectToServer(ClientHandler);
-		printf("Response From Server:\n%s\n",buffer);
+        memset(buffer,0x0,100);
+        strcpy(buffer,"time?\n");
+        ClientHandler->WriteToServer(ClientHandler,buffer,strlen(buffer));
+        ClientHandler->ReadFromServer(ClientHandler,buffer,sizeof(buffer));
+        ClientHandler->DisconnectToServer(ClientHandler);
+        printf("Response From Server:\n%s\n",buffer);
     }
     return 0;
 }
